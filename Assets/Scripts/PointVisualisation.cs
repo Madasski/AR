@@ -1,8 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class PointVisualisation : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public event Action<PointVisualisation> MovedCorrectly; 
+    
     private Vector3 _positionBeforeDrag;
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -25,6 +28,11 @@ public class PointVisualisation : MonoBehaviour, IBeginDragHandler, IDragHandler
         if (didHit == false)
         {
             transform.position = _positionBeforeDrag;
+            Debug.Log("New point position is incorrect");
+        }
+        else
+        {
+            MovedCorrectly?.Invoke(this);
         }
     }
 }

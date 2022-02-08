@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9e2e062fdf44e3b4a548dea4d5966d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointPrefab: {fileID: 8289349966815775883, guid: 1b4dec59057712345a535a41b182337a, type: 3}
+  _pointPrefab: {fileID: -3525190719281134032, guid: 1b4dec59057712345a535a41b182337a, type: 3}
 --- !u!120 &2988787604154914253
 LineRenderer:
   m_ObjectHideFlags: 0
