@@ -863,7 +863,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1134523881}
         m_TargetAssemblyTypeName: PointManager, Assembly-CSharp
-        m_MethodName: ToggleDrawing
+        m_MethodName: ToggleState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

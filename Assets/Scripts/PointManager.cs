@@ -3,31 +3,39 @@ using UnityEngine;
 
 public class PointManager : MonoBehaviour
 {
+    public static PointManager Instance;
+
     [SerializeField] private List<ClickablePlane> _clickablePlanes;
     [SerializeField] private PointCollection _pointCollectionPrefab;
 
-    private bool _isDrawing;
     private PointCollection _currentPointCollection;
+
+    public EAppState CurrentState { get; private set; }
 
     private void Awake()
     {
+        Instance = this;
+
+        CurrentState = EAppState.MovingPoints;
+
         foreach (var clickablePlane in _clickablePlanes)
         {
             clickablePlane.Clicked += AddPointToCurrentPointCollection;
         }
     }
 
-    public void ToggleDrawing()
+    public void ToggleState()
     {
-        _isDrawing = !_isDrawing;
-
-        if (_isDrawing)
+        switch (CurrentState)
         {
-            CreatePointCollection();
-        }
-        else
-        {
-            _currentPointCollection.Finish();
+            case EAppState.AddingPoints:
+                CurrentState = EAppState.MovingPoints;
+                _currentPointCollection.Finish();
+                break;
+            case EAppState.MovingPoints:
+                CurrentState = EAppState.AddingPoints;
+                CreatePointCollection();
+                break;
         }
     }
 
@@ -38,7 +46,7 @@ public class PointManager : MonoBehaviour
 
     private void AddPointToCurrentPointCollection(Vector3 position)
     {
-        if (_isDrawing == false) return;
+        if (CurrentState != EAppState.AddingPoints) return;
 
         _currentPointCollection.AddPoint(position);
     }
