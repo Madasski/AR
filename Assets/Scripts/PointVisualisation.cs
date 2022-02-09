@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 
 public class PointVisualisation : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public event Action<PointVisualisation> MovedCorrectly;
     public event Action FailedToMove;
+    public event Action<PointVisualisation> MovedCorrectly;
 
     private PointManager _pointManager;
     private Vector3 _positionBeforeDrag;
@@ -35,7 +35,7 @@ public class PointVisualisation : MonoBehaviour, IBeginDragHandler, IDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         if (_pointManager.CurrentState != EAppState.MovingPoints) return;
-        
+
         var ray = Camera.main.ScreenPointToRay(eventData.position);
         var didHit = Physics.Raycast(ray, out var hitInfo, 200f, LayerMask.GetMask("Planes"));
         if (didHit == false)

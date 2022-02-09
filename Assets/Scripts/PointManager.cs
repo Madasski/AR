@@ -34,7 +34,7 @@ public class PointManager : MonoBehaviour
                 break;
             case EAppState.MovingPoints:
                 CurrentState = EAppState.AddingPoints;
-                CreatePointCollection();
+                // CreatePointCollection();
                 break;
         }
     }
@@ -47,6 +47,11 @@ public class PointManager : MonoBehaviour
     private void AddPointToCurrentPointCollection(Vector3 position)
     {
         if (CurrentState != EAppState.AddingPoints) return;
+
+        if (_currentPointCollection == null || _currentPointCollection.IsDone)
+        {
+            CreatePointCollection();
+        }
 
         _currentPointCollection.AddPoint(position);
     }

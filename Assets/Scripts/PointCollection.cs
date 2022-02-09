@@ -5,8 +5,10 @@ public class PointCollection : MonoBehaviour
 {
     [SerializeField] private PointVisualisation _pointPrefab;
 
-    private List<PointVisualisation> _points;
     private LineRenderer _lineRenderer;
+    private List<PointVisualisation> _points;
+
+    public bool IsDone { get; private set; }
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class PointCollection : MonoBehaviour
     public void Finish()
     {
         _lineRenderer.loop = true;
+        IsDone = true;
     }
 
     private void RecalculateLineForPoint(PointVisualisation pointVisualisation)
