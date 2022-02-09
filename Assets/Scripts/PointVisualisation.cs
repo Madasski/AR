@@ -12,7 +12,7 @@ public class PointVisualisation : MonoBehaviour, IBeginDragHandler, IDragHandler
 
     private void Start()
     {
-        _pointManager = PointManager.Instance;
+        _pointManager = CompositionRoot.PointManager;
     }
 
     public void OnBeginDrag(PointerEventData eventData)

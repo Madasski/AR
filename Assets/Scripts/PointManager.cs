@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PointManager : MonoBehaviour
 {
-    public static PointManager Instance;
-
     [SerializeField] private List<ClickablePlane> _clickablePlanes;
     [SerializeField] private PointCollection _pointCollectionPrefab;
 
@@ -14,8 +12,6 @@ public class PointManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
         CurrentState = EAppState.MovingPoints;
 
         foreach (var clickablePlane in _clickablePlanes)
@@ -34,7 +30,6 @@ public class PointManager : MonoBehaviour
                 break;
             case EAppState.MovingPoints:
                 CurrentState = EAppState.AddingPoints;
-                // CreatePointCollection();
                 break;
         }
     }
