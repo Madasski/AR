@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class PointCollection : MonoBehaviour
 {
-    [SerializeField] private PointVisualisation _pointPrefab;
-
+    private PointFactory _pointFactory;
     private LineRenderer _lineRenderer;
     private List<PointVisualisation> _points;
 
@@ -12,13 +11,15 @@ public class PointCollection : MonoBehaviour
 
     private void Awake()
     {
+        _pointFactory = CompositionRoot.PointFactory;
+
         _points = new List<PointVisualisation>();
         _lineRenderer = GetComponent<LineRenderer>();
     }
 
     public void AddPoint(Vector3 position)
     {
-        var point = Instantiate(_pointPrefab, position, Quaternion.identity);
+        var point = _pointFactory.CreatePoint(position);
         point.transform.parent = transform;
         point.MovedCorrectly += RecalculateLineForPoint;
         _points.Add(point);
